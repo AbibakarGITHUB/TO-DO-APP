@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #todoapp {
+            width: 300px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #eee;
+            cursor: pointer;
+        }
+        li.selected {
+            background: #ddd;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div id="todoapp">
+    <input type="text" id="taskinput" placeholder="Add a new task" />
+    <button id="addtask">Add Task</button>
+    <button id="delete">Delete Task</button>
+    <ul id="tasklist"></ul>
+</div>
+
+<script>
+    // Model
+    let tasks = [];
+    let selectedTaskIndex = null;
+
+    // Add Task Function
+    function addTask() {
+        const taskInput = document.getElementById('taskinput');
+        const newTask = taskInput.value.trim();
+        if (newTask) {
+            tasks.push(newTask);
+            taskInput.value = '';
+            updateView();
+        }
+    }
+
+    // Update View Function
+    function updateView() {
+        const taskList = document.getElementById('tasklist');
+        taskList.innerHTML = ''; // Clear the list first
+
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.textContent = task;
+            li.dataset.index = index; // Store the index in a data attribute
+            li.addEventListener('click', selectTask);
+            taskList.appendChild(li);
+        });
+    }
+
+
+
+    function uppdateview(){
+        const tasklist = document.getElementById('tasklist')
+        tasklist.innerHTML('');
+
+        task.forEach(task,idex)=>{
+            const li = document.createElement('li');
+            li.dataset.index.index;
+            li.addEventListener('click, seletedtask');
+            tasklist.push
+        });
+    }
+
+    // Select Task Function
+    function selectTask(e) {
+        const allTasks = document.querySelectorAll('#tasklist li');
+        
+        allTasks.forEach(task => task.classList.remove('selected'));
+        e.target.classList.add('selected');
+        selectedTaskIndex = e.target.dataset.index;
+    }
+    function selectedtask(e){
+        const alltasks = document.querySelector('#tasklist li');
+        
+        alltasks.forEach(task,idex)
+    }
+
+    // Delete Task Function
+    function deleteTask() {
+        if (selectedTaskIndex !== null) {
+            tasks.splice(selectedTaskIndex, 1);
+            selectedTaskIndex = null; // Reset the selected task index
+            updateView();
+        }
+    }
+
+    // Event Listeners
+    document.getElementById('addtask').addEventListener('click', addTask);
+    document.getElementById('delete').addEventListener('click', deleteTask);
+
+    // Initial call to update the view
+    updateView();
+</script>
+
+</body>
+</html>
