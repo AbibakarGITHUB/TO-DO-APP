@@ -66,7 +66,22 @@
     let tasks = [];
     let selectedTaskIndex = null;
 
-    // Add Task Function
+    
+    // Update View Function
+    function updateView() {
+        const taskList = document.getElementById('tasklist');
+        taskList.innerHTML = ''; 
+
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.textContent = task;
+            li.dataset.index = index; 
+            li.addEventListener('click', selectTask);
+            taskList.appendChild(li);
+        });
+    }
+
+    //controll
     function addTask() {
         const taskInput = document.getElementById('taskinput');
         const newTask = taskInput.value.trim();
@@ -77,35 +92,9 @@
         }
     }
 
-    // Update View Function
-    function updateView() {
-        const taskList = document.getElementById('tasklist');
-        taskList.innerHTML = ''; // Clear the list first
-
-        tasks.forEach((task, index) => {
-            const li = document.createElement('li');
-            li.textContent = task;
-            li.dataset.index = index; // Store the index in a data attribute
-            li.addEventListener('click', selectTask);
-            taskList.appendChild(li);
-        });
-    }
 
 
-
-    function uppdateview(){
-        const tasklist = document.getElementById('tasklist')
-        tasklist.innerHTML('');
-
-        task.forEach(task,idex)=>{
-            const li = document.createElement('li');
-            li.dataset.index.index;
-            li.addEventListener('click, seletedtask');
-            tasklist.push
-        });
-    }
-
-    // Select Task Function
+  
     function selectTask(e) {
         const allTasks = document.querySelectorAll('#tasklist li');
         
@@ -113,26 +102,22 @@
         e.target.classList.add('selected');
         selectedTaskIndex = e.target.dataset.index;
     }
-    function selectedtask(e){
-        const alltasks = document.querySelector('#tasklist li');
-        
-        alltasks.forEach(task,idex)
-    }
+    
 
-    // Delete Task Function
+ 
     function deleteTask() {
         if (selectedTaskIndex !== null) {
             tasks.splice(selectedTaskIndex, 1);
-            selectedTaskIndex = null; // Reset the selected task index
+            selectedTaskIndex = null;
             updateView();
         }
     }
 
-    // Event Listeners
+    
     document.getElementById('addtask').addEventListener('click', addTask);
     document.getElementById('delete').addEventListener('click', deleteTask);
 
-    // Initial call to update the view
+  
     updateView();
 </script>
 
